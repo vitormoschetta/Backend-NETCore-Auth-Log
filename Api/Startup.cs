@@ -72,7 +72,7 @@ namespace Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fera Joer - API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth - API", Version = "v1" });
             });
         }
 

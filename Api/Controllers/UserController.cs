@@ -14,14 +14,12 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class UserAuthController : ControllerBase
-    {
-        private readonly TokenService _tokenService;
+    public class UserController : ControllerBase
+    {        
         private readonly IUserAuthRepository _repository;
         private readonly IUserAuthHandler _handler;        
-        public UserAuthController(TokenService tokenService, IUserAuthRepository repository, IUserAuthHandler handler)
-        {
-            _tokenService = tokenService;
+        public UserController(IUserAuthRepository repository, IUserAuthHandler handler)
+        {            
             _repository = repository;
             _handler = handler;            
         }
@@ -59,18 +57,7 @@ namespace Api.Controllers
             CommandResult result = _handler.ActivateFirstAccess(command, User.Identity.Name);
             return result;
         }
-
-
-        [HttpPost]
-        public CommandResultToken Login(LoginUserAuthCommand command)
-        {
-            CommandResultToken result = _handler.Login(command.Username, command.Password);
-            if (result.Success)            
-                 result.Token = _tokenService.GenerateToken((UserAuth)result.Object);                          
-               
-            return result;
-        }
-
+       
         [HttpPost]
         [Authorize(Roles="Admin")]
         public CommandResult UpdateRoleActive(UpdateRoleActiveCommand command)

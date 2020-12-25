@@ -5,10 +5,9 @@ namespace Domain.SubDomains.Authentication.Commands
         public CommandResultToken(
         bool success,
         string message,
-        object objeto        
+        object objeto
         ) : base(success, message, objeto)
-        {
-        }
+        { }
 
         public string Token { get; set; }
     }
