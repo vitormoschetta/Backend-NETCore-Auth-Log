@@ -1,9 +1,8 @@
 using Api.Services;
 using Domain.SubDomains.Authentication.Commands;
 using Domain.SubDomains.Authentication.Contracts.Handlers;
-using Domain.SubDomains.Authentication.Contracts.Repositories;
 using Domain.SubDomains.Authentication.Entities;
-using Domains.Authentication.Commands.UserAuthCommands;
+using Domains.Authentication.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -21,9 +20,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public CommandResultToken Login(LoginUserAuthCommand command)
+        public CommandResultToken Login(UserLoginCommand command)
         {
-            CommandResultToken result = _handler.Login(command.Username, command.Password);
+            CommandResultToken result = _handler.Login(command);
             if (result.Success)            
                  result.Token = _tokenService.GenerateToken((UserAuth)result.Object);                          
                

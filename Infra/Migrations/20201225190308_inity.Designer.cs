@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201225184041_inity")]
+    [Migration("20201225190308_inity")]
     partial class inity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

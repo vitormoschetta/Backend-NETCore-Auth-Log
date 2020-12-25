@@ -1,8 +1,8 @@
 using System;
 
-namespace Domains.Authentication.Commands.UserAuthCommands
+namespace Domains.Authentication.Commands
 {
-    public class UpdateRoleActiveCommand
+    public class UserUpdateRoleActiveCommand
     {
         public Guid Id { get; set; }
         public string Role { get; set; }

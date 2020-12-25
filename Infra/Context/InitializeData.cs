@@ -66,7 +66,6 @@ namespace Infra.Context
 
                 context.Add(log);
                 context.SaveChanges();
-
             }
         }
 

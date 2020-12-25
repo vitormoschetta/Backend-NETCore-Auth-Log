@@ -1,6 +1,6 @@
-namespace Domains.Authentication.Commands.UserAuthCommands
+namespace Domains.Authentication.Commands
 {
-    public class LoginUserAuthCommand
+    public class UserLoginCommand
     {
         public string Username { get; set; }
         public string Password { get; set; }

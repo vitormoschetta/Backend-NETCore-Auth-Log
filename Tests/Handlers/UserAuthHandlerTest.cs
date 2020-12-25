@@ -1,6 +1,6 @@
 using System.Linq;
 using Domain.SubDomains.Authentication.Handlers;
-using Domains.Authentication.Commands.UserAuthCommands;
+using Domains.Authentication.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Mock;
 
@@ -15,7 +15,7 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var command = new RegisterUserAuthCommand();
+            var command = new UserRegisterCommand();
             command.Username = "vitor";
             command.Password = "1234";
             var result = handler.Register(command);
@@ -28,7 +28,7 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var command = new RegisterAdminUserAuthCommand();
+            var command = new UserRegisterAdminCommand();
             command.Username = "vitor";
             command.Password = "1234";
             command.Role = "user";
@@ -43,7 +43,10 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var result = handler.Login("admin", "123456");
+            var command = new UserLoginCommand();
+            command.Username = "admin";
+            command.Password = "1234";
+            var result = handler.Login(command);
             Assert.IsTrue(result.Success);
         }
 
@@ -54,7 +57,10 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var result = handler.Login("admin", "1234");
+            var command = new UserLoginCommand();
+            command.Username = "admin";
+            command.Password = "1234";
+            var result = handler.Login(command);
             Assert.IsFalse(result.Success);
         }
 
@@ -64,7 +70,10 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var result = handler.Login("newUser", "123456");
+            var command = new UserLoginCommand();
+            command.Username = "admin";
+            command.Password = "1234";
+            var result = handler.Login(command);
             Assert.IsFalse(result.Success);
         }
 
@@ -74,7 +83,7 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var command = new RegisterUserAuthCommand();
+            var command = new UserRegisterCommand();
             command.Username = "vitor";
             command.Password = "123";
             var result = handler.Register(command);
@@ -87,7 +96,7 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var command = new RegisterUserAuthCommand();
+            var command = new UserRegisterCommand();
             command.Username = "vit";
             command.Password = "1234";
             var result = handler.Register(command);
@@ -101,7 +110,7 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var command = new ActivateUserCommand();
+            var command = new UserActivateCommand();
             command.Id = repository.GetInactivesFirstAccess().FirstOrDefault().Id;
             command.Role = "user";           
             var result = handler.ActivateFirstAccess(command, "userIdentity");
@@ -115,7 +124,7 @@ namespace Tests.Handlers
             var repository = new FakeUserAuthRepository();
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
-            var command = new UpdatePasswordUserCommand();
+            var command = new UserUpdatePasswordCommand();
             command.Username = repository.GetAll().FirstOrDefault().Username;
             command.Password = "123456";    
             command.NewPassword = "1234";     

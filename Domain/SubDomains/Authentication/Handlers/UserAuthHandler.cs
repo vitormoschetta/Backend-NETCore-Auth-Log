@@ -3,7 +3,7 @@ using Domain.SubDomains.Authentication.Commands;
 using Domain.SubDomains.Authentication.Contracts.Handlers;
 using Domain.SubDomains.Authentication.Contracts.Repositories;
 using Domain.SubDomains.Authentication.Entities;
-using Domains.Authentication.Commands.UserAuthCommands;
+using Domains.Authentication.Commands;
 using Domains.Log.Entities;
 using Domains.Subdomains.Log.Contracts.Repositories;
 using Shared;
@@ -20,7 +20,7 @@ namespace Domain.SubDomains.Authentication.Handlers
             _log = log;
         }
 
-        public CommandResult Register(RegisterUserAuthCommand command)
+        public CommandResult Register(UserRegisterCommand command)
         {
             var exist = _repository.Exists(command.Username);
             if (exist)
@@ -57,7 +57,7 @@ namespace Domain.SubDomains.Authentication.Handlers
             return new CommandResult(true, "Cadastro realizado. ", user);
         }
 
-        public CommandResult RegisterAdmin(RegisterAdminUserAuthCommand command, string userIdentity)
+        public CommandResult RegisterAdmin(UserRegisterAdminCommand command, string userIdentity)
         {
             var exist = _repository.Exists(command.Username);
             if (exist)
@@ -96,7 +96,7 @@ namespace Domain.SubDomains.Authentication.Handlers
 
 
 
-        public CommandResult ActivateFirstAccess(ActivateUserCommand command, string userIdentity)
+        public CommandResult ActivateFirstAccess(UserActivateCommand command, string userIdentity)
         {
             var user = _repository.GetById(command.Id);
             if (user == null)       
@@ -121,17 +121,17 @@ namespace Domain.SubDomains.Authentication.Handlers
         }
 
 
-        public CommandResultToken Login(string userName, string password)
+        public CommandResultToken Login(UserLoginCommand command)
         {
-            var user = _repository.GetSalt(userName);
+            var user = _repository.GetSalt(command.Username);
             if (user == null)
                 return new CommandResultToken(false, "Login inválido. ", null);
 
             var salt_tabela = user.Salt;
             byte[] salt = Convert.FromBase64String(salt_tabela);
-            var hashPassword = Hash.Create(password, salt); // <-- monta hash para comparação / login
+            var hashPassword = Hash.Create(command.Password, salt); // <-- monta hash para comparação / login
 
-            user = _repository.Login(userName, hashPassword);
+            user = _repository.Login(command.Username, hashPassword);
             if (user == null)
                 return new CommandResultToken(false, "Login inválido. ", null);
 
@@ -146,7 +146,7 @@ namespace Domain.SubDomains.Authentication.Handlers
             var log = new AccessLog(
                 "Login",
                 DateTime.Now,
-                userName,
+                command.Username,
                 null,
                 null);
 
@@ -157,7 +157,7 @@ namespace Domain.SubDomains.Authentication.Handlers
             return new CommandResultToken(true, "Login efetuado com sucesso! ", user);
         }
 
-        public CommandResult UpdateRoleActive(UpdateRoleActiveCommand command, string userIdentity)
+        public CommandResult UpdateRoleActive(UserUpdateRoleActiveCommand command, string userIdentity)
         {
             var user = _repository.GetById(command.Id);
             if (user == null) 
@@ -201,7 +201,7 @@ namespace Domain.SubDomains.Authentication.Handlers
             return new CommandResult(true, "Usuário excluído. ", user);
         }
 
-        public CommandResult UpdatePassword(UpdatePasswordUserCommand command, string userIdentity)
+        public CommandResult UpdatePassword(UserUpdatePasswordCommand command, string userIdentity)
         {
             // verificação da validade do usuario e senha
             var user = _repository.GetSalt(command.Username);

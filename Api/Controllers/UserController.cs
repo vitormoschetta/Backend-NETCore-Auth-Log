@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Api.Services;
 using Domain;
-using Domain.SubDomains.Authentication.Commands;
 using Domain.SubDomains.Authentication.Contracts.Handlers;
 using Domain.SubDomains.Authentication.Contracts.Repositories;
 using Domain.SubDomains.Authentication.Entities;
-using Domains.Authentication.Commands.UserAuthCommands;
+using Domains.Authentication.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +24,7 @@ namespace Api.Controllers
 
 
         [HttpPost]
-        public CommandResult Register(RegisterUserAuthCommand command)
+        public CommandResult Register(UserRegisterCommand command)
         {
             CommandResult result = _handler.Register(command);
             return result;
@@ -34,7 +32,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Authorize(Roles="Admin")]
-        public CommandResult RegisterAdmin(RegisterAdminUserAuthCommand command)
+        public CommandResult RegisterAdmin(UserRegisterAdminCommand command)
         {
             CommandResult result = _handler.RegisterAdmin(command, User.Identity.Name);
             return result;
@@ -52,7 +50,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public CommandResult ActivateFirstAccess(ActivateUserCommand command)
+        public CommandResult ActivateFirstAccess(UserActivateCommand command)
         {            
             CommandResult result = _handler.ActivateFirstAccess(command, User.Identity.Name);
             return result;
@@ -60,7 +58,7 @@ namespace Api.Controllers
        
         [HttpPost]
         [Authorize(Roles="Admin")]
-        public CommandResult UpdateRoleActive(UpdateRoleActiveCommand command)
+        public CommandResult UpdateRoleActive(UserUpdateRoleActiveCommand command)
         {
             CommandResult result = _handler.UpdateRoleActive(command, User.Identity.Name);            
             return result;
@@ -104,7 +102,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public CommandResult UpdatePassword(UpdatePasswordUserCommand command)
+        public CommandResult UpdatePassword(UserUpdatePasswordCommand command)
         {
             CommandResult result = _handler.UpdatePassword(command, User.Identity.Name);           
             return result;
