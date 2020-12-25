@@ -24,7 +24,8 @@ namespace Api
                 try
                 {                    
                     InitializeData.InitializeUsers(services);                   
-                    InitializeData.InitializeAccesLog(services);         
+                    InitializeData.InitializeAccesLog(services);   
+                    InitializeData.InitializeProducts(services);      
                 }
                 catch
                 {

@@ -43,7 +43,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public List<UserAuth> GetInactivesFirstAccess()
+        public IEnumerable<UserAuth> GetInactivesFirstAccess()
         {
             var users = _repository.GetInactivesFirstAccess();
             return users;
@@ -78,7 +78,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Authorize(Roles="Admin")]
-        public List<UserAuth> GetAll()
+        public IEnumerable<UserAuth> GetAll()
         {
             var users = _repository.GetAll();
             return users;
@@ -113,7 +113,7 @@ namespace Api.Controllers
 
         [HttpGet("{filter}")]
         [Authorize(Roles="Admin")]
-        public List<UserAuth> Search(string filter = "")
+        public IEnumerable<UserAuth> Search(string filter = "")
         {            
             if (filter == "empty") filter = "";
             var result = _repository.Search(filter);

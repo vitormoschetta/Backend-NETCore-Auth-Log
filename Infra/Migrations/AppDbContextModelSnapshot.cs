@@ -79,6 +79,25 @@ namespace Infra.Migrations
 
                     b.ToTable("AccessLog");
                 });
+
+            modelBuilder.Entity("Domains.Other.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(120)")
+                        .HasMaxLength(120);
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Product");
+                });
 #pragma warning restore 612, 618
         }
     }
