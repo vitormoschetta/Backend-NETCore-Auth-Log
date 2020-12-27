@@ -136,7 +136,7 @@ namespace Domain.SubDomains.Authentication.Handlers
                 return new CommandResultToken(false, "Login inválido. ", null);
 
             if (user.Active == false && user.Role == null)
-                AddNotification("Aguardando liberação de acesso. ");
+                AddNotification("Aguardando liberação de acesso.. Contacte o Gestor da aplicação se deseja agilizar a liberação. ");
             else if (user.Active == false)
                 AddNotification("Usuário inativo. Contacte o Administrado. ");
 

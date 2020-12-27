@@ -12,6 +12,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public class UserController : ControllerBase
     {        
         private readonly IUserAuthRepository _repository;
@@ -21,14 +22,7 @@ namespace Api.Controllers
             _repository = repository;
             _handler = handler;            
         }
-
-
-        [HttpPost]
-        public CommandResult Register(UserRegisterCommand command)
-        {
-            CommandResult result = _handler.Register(command);
-            return result;
-        }
+       
 
         [HttpPost]
         [Authorize(Roles="Admin")]
@@ -82,16 +76,14 @@ namespace Api.Controllers
             return users;
         }
 
-        [HttpGet("{id}")]
-        [Authorize]
+        [HttpGet("{id}")]       
         public UserAuth GetById(Guid id)
         {
             var user = _repository.GetById(id);
             return user;
         }
 
-        [HttpGet("{name}")]
-        [Authorize]
+        [HttpGet("{name}")]       
         public UserAuth GetByName(string name)
         {
             var user = _repository.GetByName(name);
@@ -100,8 +92,7 @@ namespace Api.Controllers
 
 
 
-        [HttpPost]
-        [Authorize]
+        [HttpPost]       
         public CommandResult UpdatePassword(UserUpdatePasswordCommand command)
         {
             CommandResult result = _handler.UpdatePassword(command, User.Identity.Name);           

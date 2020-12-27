@@ -5,12 +5,13 @@ using Domains.Other.Commands;
 using Domains.Other.Contracts.Handlers;
 using Domains.Other.Contracts.Repositories;
 using Domains.Other.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]")]    
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _repository;
@@ -46,6 +47,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        // [Authorize(Roles="Admin")]
         public CommandResult Delete(Guid id)
         {
             var result = _handler.Delete(id);
