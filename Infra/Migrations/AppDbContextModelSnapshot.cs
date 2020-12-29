@@ -18,8 +18,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.SubDomains.Authentication.Entities.UserAuth", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Active")
@@ -50,8 +49,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domains.Log.Entities.AccessLog", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Acao")
@@ -82,8 +80,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domains.Other.Entities.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

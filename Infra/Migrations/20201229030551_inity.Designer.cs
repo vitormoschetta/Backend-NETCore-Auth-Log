@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201225190308_inity")]
+    [Migration("20201229030551_inity")]
     partial class inity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,8 +20,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.SubDomains.Authentication.Entities.UserAuth", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Active")
@@ -52,8 +51,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domains.Log.Entities.AccessLog", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Acao")
@@ -84,8 +82,7 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domains.Other.Entities.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

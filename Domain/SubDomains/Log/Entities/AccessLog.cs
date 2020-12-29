@@ -6,6 +6,7 @@ namespace Domains.Log.Entities
     {
         public AccessLog(string acao, DateTime data, string usuario, string tabelaModificada, string dados)
         {            
+            Id = Guid.NewGuid().ToString();
             Acao = acao;
             Data = data;
             Usuario = usuario;
@@ -15,7 +16,7 @@ namespace Domains.Log.Entities
 
         public AccessLog() { }
 
-        public int Id { get; private set; }
+        public string Id { get; private set; }
         public string Acao { get; private set; }
         public DateTime Data { get; private set; }
         public string Usuario { get; private set; }

@@ -11,7 +11,7 @@ namespace Infra.Migrations
                 name: "AccessLog",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
                     Acao = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Data = table.Column<DateTime>(type: "datetime", nullable: false),
                     Usuario = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
@@ -27,7 +27,7 @@ namespace Infra.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10, 2)", nullable: false)
                 },
@@ -40,7 +40,7 @@ namespace Infra.Migrations
                 name: "UserAuth",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
                     Username = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Password = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
                     Salt = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
