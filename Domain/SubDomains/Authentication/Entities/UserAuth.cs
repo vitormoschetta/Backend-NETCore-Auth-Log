@@ -7,7 +7,7 @@ namespace Domain.SubDomains.Authentication.Entities
     {
         public UserAuth(string username, string password, string role = null, bool active = false)
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
             Username = username;
             Password = password;
             Role = role;
@@ -18,7 +18,7 @@ namespace Domain.SubDomains.Authentication.Entities
 
         public UserAuth() { }
 
-        public Guid Id { get; private set; }
+        public string Id { get; private set; }
         public string Username { get; private set; }
         public string Password { get; private set; }
         public string Salt { get; private set; }

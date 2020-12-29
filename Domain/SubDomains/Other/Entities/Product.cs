@@ -7,14 +7,14 @@ namespace Domains.Other.Entities
     {
          public Product(string name, decimal price)
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
             Name = name;
             Price = price;
 
             Validate();
         }
 
-        public Guid Id { get; private set; }
+        public string Id { get; private set; }
         public string Name { get; private set; }
         public decimal Price { get; private set; }
 

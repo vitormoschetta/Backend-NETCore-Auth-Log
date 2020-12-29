@@ -181,7 +181,7 @@ namespace Domain.SubDomains.Authentication.Handlers
             return new CommandResult(true, "Atualizado. ", user);
         }
 
-        public CommandResult Delete(Guid id, string userIdentity)
+        public CommandResult Delete(string id, string userIdentity)
         {
             var user = _repository.GetById(id);
             if (user == null)

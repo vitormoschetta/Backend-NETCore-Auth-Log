@@ -61,7 +61,7 @@ namespace Api.Controllers
 
         [HttpDelete("{id}")]
         // [Authorize(Roles="Admin")]
-        public CommandResult Delete(Guid id)
+        public CommandResult Delete(string id)
         {
             CommandResult result = _handler.Delete(id, User.Identity.Name);            
             return result;
@@ -77,7 +77,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id}")]       
-        public UserAuth GetById(Guid id)
+        public UserAuth GetById(string id)
         {
             var user = _repository.GetById(id);
             return user;

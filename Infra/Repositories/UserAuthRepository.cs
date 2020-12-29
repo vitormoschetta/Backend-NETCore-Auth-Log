@@ -68,7 +68,7 @@ namespace Infra.Repositories
             }
         }
 
-        public void UpdatePassword(Guid id, string password)
+        public void UpdatePassword(string id, string password)
         {
             string query = "";
             query += $" update UserAuth set Password = '{password}' ";
@@ -80,7 +80,7 @@ namespace Infra.Repositories
             }
         }
 
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             var model = _context.UserAuth.FirstOrDefault(x => x.Id == id);
             _context.Remove(model);
@@ -94,7 +94,7 @@ namespace Infra.Repositories
             return false;
         }
 
-        public bool ExistsUpdate(string name, Guid id)
+        public bool ExistsUpdate(string name, string id)
         {
             var model = _context.UserAuth.FirstOrDefault(x => x.Username == name && x.Id != id);
             if (model != null) return true;
@@ -115,7 +115,7 @@ namespace Infra.Repositories
 
         }
 
-        public UserAuth GetById(Guid id)
+        public UserAuth GetById(string id)
         {
             string query = "";
             query = " select U.Id, U.Username, U.Role, U.Active ";

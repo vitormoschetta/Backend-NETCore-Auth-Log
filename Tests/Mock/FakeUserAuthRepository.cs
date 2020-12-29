@@ -15,28 +15,28 @@ namespace Tests.Mock
             List = new List<UserAuth>();
 
             // Usuario Admin: 
-            var user = new UserAuth("admin", "123456", "Admin", true);
+            var user = new UserAuth("admin", "1234", "Admin", true);
             var salt = Salt.Create();
             var hash = Hash.Create(user.Password, salt);
             user.AddHash(hash, Convert.ToBase64String(salt));
             List.Add(user);
 
             // Usuario comum ativo:
-            user = new UserAuth("userActive", "123456", "User", true);
+            user = new UserAuth("userActive", "1234", "User", true);
             salt = Salt.Create();
             hash = Hash.Create(user.Password, salt);
             user.AddHash(hash, Convert.ToBase64String(salt));
             List.Add(user);
 
             // Usuario comum inativo:
-            user = new UserAuth("userInactive", "123456", "User", false);
+            user = new UserAuth("userInactive", "1234", "User", false);
             salt = Salt.Create();
             hash = Hash.Create(user.Password, salt);
             user.AddHash(hash, Convert.ToBase64String(salt));
             List.Add(user);
 
             // Usuario cadastrado, aguardando liberação de acesso (feito pelo Admin):
-            user = new UserAuth("userNew", "123456");
+            user = new UserAuth("userNew", "1234");
             salt = Salt.Create();
             hash = Hash.Create(user.Password, salt);
             user.AddHash(hash, Convert.ToBase64String(salt));
@@ -67,7 +67,7 @@ namespace Tests.Mock
             return List.SingleOrDefault(x => x.Username == userName && x.Password == password);
         }
 
-        public UserAuth GetById(Guid id)
+        public UserAuth GetById(string id)
         {
             return List.SingleOrDefault(x => x.Id == id);
         }
@@ -77,7 +77,7 @@ namespace Tests.Mock
             return List.SingleOrDefault(x => x.Username == name);
         }
 
-        public void Activate(Guid id, string role)
+        public void Activate(string id, string role)
         {
             var user = List.SingleOrDefault(x => x.Id == id);
             if (user == null)
@@ -89,7 +89,7 @@ namespace Tests.Mock
             List.Add(newUser);
         }
 
-        public void Inactivate(Guid id, string role)
+        public void Inactivate(string id, string role)
         {
             var user = List.SingleOrDefault(x => x.Id == id);
             if (user == null)
@@ -101,7 +101,7 @@ namespace Tests.Mock
             List.Add(newUser);
         }
 
-        public void UpdatePassword(Guid id, string password)
+        public void UpdatePassword(string id, string password)
         {
             var user = List.SingleOrDefault(x => x.Id == id);
             if (user == null)
@@ -113,7 +113,7 @@ namespace Tests.Mock
             List.Add(newUser);
         }
 
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             var user = List.SingleOrDefault(x => x.Id == id);
             if (user != null)
@@ -129,7 +129,7 @@ namespace Tests.Mock
             return true;
         }
 
-        public bool ExistsUpdate(string userName, Guid id)
+        public bool ExistsUpdate(string userName, string id)
         {
             var item = List.FirstOrDefault(x => x.Username == userName && x.Id != id);
             if (item != null)

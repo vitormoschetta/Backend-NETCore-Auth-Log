@@ -59,7 +59,7 @@ namespace Tests.Handlers
             var handler = new UserAuthHandler(repository, logRepository);
             var command = new UserLoginCommand();
             command.Username = "admin";
-            command.Password = "1234";
+            command.Password = "1234567";
             var result = handler.Login(command);
             Assert.IsFalse(result.Success);
         }
@@ -71,7 +71,7 @@ namespace Tests.Handlers
             var logRepository = new FakeAccessLogRepository();
             var handler = new UserAuthHandler(repository, logRepository);
             var command = new UserLoginCommand();
-            command.Username = "admin";
+            command.Username = "userInactive";
             command.Password = "1234";
             var result = handler.Login(command);
             Assert.IsFalse(result.Success);
@@ -126,8 +126,8 @@ namespace Tests.Handlers
             var handler = new UserAuthHandler(repository, logRepository);
             var command = new UserUpdatePasswordCommand();
             command.Username = repository.GetAll().FirstOrDefault().Username;
-            command.Password = "123456";    
-            command.NewPassword = "1234";     
+            command.Password = "1234";    
+            command.NewPassword = "123456";     
             var result = handler.UpdatePassword(command, "userIdentity");
             Assert.IsTrue(result.Success);
         }       

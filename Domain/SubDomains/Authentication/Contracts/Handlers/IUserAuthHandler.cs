@@ -1,4 +1,3 @@
-using System;
 using Domain.SubDomains.Authentication.Commands;
 using Domains.Authentication.Commands;
 
@@ -12,6 +11,6 @@ namespace Domain.SubDomains.Authentication.Contracts.Handlers
         CommandResultToken Login(UserLoginCommand command);
         CommandResult UpdateRoleActive(UserUpdateRoleActiveCommand command, string userIdentity);
         CommandResult UpdatePassword(UserUpdatePasswordCommand command, string userIdentity);
-        CommandResult Delete(Guid id, string userIdentity);
+        CommandResult Delete(string id, string userIdentity);
     }
 }

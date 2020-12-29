@@ -22,7 +22,7 @@ namespace Infra.Repositories
             _context.SaveChanges();
         }
 
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             var model = _context.Product.FirstOrDefault(x => x.Id == id);
             _context.Remove(model);
@@ -45,7 +45,7 @@ namespace Infra.Repositories
             return false;
         }
 
-        public bool ExistsUpdate(string name, Guid id)
+        public bool ExistsUpdate(string name, string id)
         {
             var model = _context.Product.FirstOrDefault(x => x.Name == name && x.Id != id);
 
@@ -63,7 +63,7 @@ namespace Infra.Repositories
                 .ToList();
         }
 
-        public Product GetById(Guid id)
+        public Product GetById(string id)
         {
             return _context.Product
                 .AsNoTracking()                

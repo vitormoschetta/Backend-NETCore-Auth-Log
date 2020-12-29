@@ -71,7 +71,7 @@ namespace Domains.Other.Handlers
             return new CommandResult(true, "Preço do Produto atualizado com sucesso! ", product);
         }
 
-        public CommandResult Delete(Guid id)
+        public CommandResult Delete(string id)
         {
             var product = _repository.GetById(id);
             if (product == null)

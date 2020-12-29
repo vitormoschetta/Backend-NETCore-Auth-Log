@@ -23,7 +23,7 @@ namespace Tests.Mock
             List.Add(model);
         }
 
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             var item = List.FirstOrDefault(x => x.Id == id);
 
@@ -52,7 +52,7 @@ namespace Tests.Mock
             return false;
         }
 
-        public bool ExistsUpdate(string name, Guid id)
+        public bool ExistsUpdate(string name, string id)
         {
             var item = List.FirstOrDefault(x => x.Name == name && x.Id != id);
 
@@ -67,7 +67,7 @@ namespace Tests.Mock
             return List.OrderBy(x => x.Name).ToList();
         }
 
-        public Product GetById(Guid id)
+        public Product GetById(string id)
         {
             return List.FirstOrDefault(x => x.Id == id);
         }
