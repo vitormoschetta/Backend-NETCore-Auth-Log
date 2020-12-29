@@ -6,9 +6,9 @@ namespace Domain
     {
         public static string ConnectionString()
         {
-            return "DataSource=../DataBase.db";
+            return "DataSource=../DataBase.sqlite";
             
-            //return "Server=172.16.107.164,2733;DataBase=FeraJoer;User id=dba;Password=m4st3rpw1";
+            // return "Server=172.16.107.164,2733;DataBase=FeraJoer;User id=dba;Password=m4st3rpw1";
         }
 
 

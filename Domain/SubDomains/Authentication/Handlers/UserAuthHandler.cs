@@ -211,15 +211,14 @@ namespace Domain.SubDomains.Authentication.Handlers
             var salt_tabela = user.Salt;
             byte[] salt = Convert.FromBase64String(salt_tabela);
             var hashPassword = Hash.Create(command.Password, salt);
-
-            user = _repository.Login(command.Username, hashPassword);
-            if (user == null)
+            
+            if (user.Password != hashPassword)
                 return new CommandResult(false, "Senha antiga não confere. ", command);            
 
             // criacao de novo hash para a nova senha
             hashPassword = Hash.Create(command.NewPassword, salt);
 
-            user.UpdatePassword(hashPassword);
+            user.UpdatePassword(command.NewPassword);
 
             AddNotifications(user);
             if (Invalid)

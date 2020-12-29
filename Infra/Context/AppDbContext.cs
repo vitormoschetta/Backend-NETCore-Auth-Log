@@ -18,9 +18,9 @@ namespace Infra.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            // options.UseSqlite(Settings.ConnectionString());
+            options.UseSqlite(Settings.ConnectionString());
 
-            options.UseInMemoryDatabase(Settings.ConnectionString());
+            // options.UseInMemoryDatabase(Settings.ConnectionString());
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

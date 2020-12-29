@@ -24,12 +24,12 @@ namespace Api.Configurations
         public static void ConfigureDbContext(this IServiceCollection services)
         {
             // Use in memory
-            services.AddDbContext<AppDbContext>(options =>
-               options.UseInMemoryDatabase(Settings.ConnectionString()));
+            // services.AddDbContext<AppDbContext>(options =>
+            //    options.UseInMemoryDatabase(Settings.ConnectionString()));
 
             //Use SQLite            
-            // services.AddDbContext<AppDbContext>(options =>
-            //    options.UseSqlite(Settings.ConnectionString()));
+            services.AddDbContext<AppDbContext>(options =>
+               options.UseSqlite(Settings.ConnectionString()));
             
         }  
 

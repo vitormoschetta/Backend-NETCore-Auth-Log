@@ -7,6 +7,7 @@ using Domain.SubDomains.Authentication.Contracts.Repositories;
 using Domain.SubDomains.Authentication.Entities;
 using Infra.Context;
 using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
@@ -34,7 +35,7 @@ namespace Infra.Repositories
             query += " from UserAuth as U ";
             query += " where U.Role is null and U.Active = 0";
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 return _dapper.Query<UserAuth>(query).ToList();
             }
@@ -61,7 +62,7 @@ namespace Infra.Repositories
             query += $" role = '{model.Role}' ";
             query += $" where Id = '{model.Id}' ";
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 _dapper.Execute(query);
             }
@@ -73,7 +74,7 @@ namespace Infra.Repositories
             query += $" update UserAuth set Password = '{password}' ";
             query += $" where Id = '{id}' ";
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 _dapper.Execute(query);
             }
@@ -107,7 +108,7 @@ namespace Infra.Repositories
             query += " from UserAuth as U ";
             query += " where U.Role is not null ";
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 return _dapper.Query<UserAuth>(query).ToList();
             }
@@ -121,7 +122,7 @@ namespace Infra.Repositories
             query += " from UserAuth as U ";
             query += $" where U.Id = '{id}' ";
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 return _dapper.QuerySingleOrDefault<UserAuth>(query);
             }
@@ -135,7 +136,7 @@ namespace Infra.Repositories
             query += " from UserAuth as U ";
             query += $" where U.Username = '{name}' ";
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 return _dapper.QuerySingleOrDefault<UserAuth>(query);
             }
@@ -164,7 +165,7 @@ namespace Infra.Repositories
                 query += $" or U.Role like '%{filter}%' ";
             }
 
-            using (var _dapper = new SqlConnection(GetConnection()))
+            using (var _dapper = new SqliteConnection(GetConnection()))
             {
                 return _dapper.Query<UserAuth>(query).ToList();
             }
